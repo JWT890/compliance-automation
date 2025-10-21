@@ -8,7 +8,13 @@ import select
 print("Welcome to the CMMC Automation Script for CMMC Level l Compliance")
 
 def check_os_info():
+    os_name = platform.system()
+    os_version = platform.release()
+    os_arch = platform.machine()
 
+    print(f"Operating System: {os_name}")
+    print(f"Version: {os_version}")
+    print(f"Architecture: {os_arch}")
 
 def check_firewall_status():
 
@@ -33,6 +39,22 @@ def main_menu():
         print("1. Check System Info (AC.L1-3.1.1)")
         print("2. Check Firewall Status (SI.L1-3.14.1)")
         print("3. Check Antivirus Status (SI.L1-3.14.2)")
+
+        choice = input("Enter your choice: ")
+        if choice == "1":
+            check_os_info()
+        elif choice == "2":
+            check_firewall_status()
+        elif choice == "3":
+            check_antivirus_status()
+        elif choice == "4":
+            check_user_accounts()
+        elif choice == "5":
+            genreate_report()
+        elif choice == "6":
+            break
+        else:
+            print("Invalid choice. Please try again.")
 
 if __name__ == "__main__":
     main_menu()
