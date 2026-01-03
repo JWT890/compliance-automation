@@ -17,15 +17,24 @@ def check_os_info():
     print(f"Architecture: {os_arch}")
 
 def check_firewall_status():
-
+    if platform.system() == 'Windows':
+        status = subprocess.run(['netsh', 'adufirewall', 'show', 'allprofiles'], capture_output=True, text=True)
+        print(status.stdout)
+    elif platform.system() == 'Linux':
+        status = subprocess.run(['sudo', 'ufw', 'status'], capture_output=True, text=True)
+        print(status.stdout)
+    else:
+        print("Firewall status check not supported on this OS.")
 
 def check_antivirus_status():
 
 
 def check_user_accounts():
+    
 
+def monitor_network():
 
-def genreate_report():
+def generate_report():
     report_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     with open(f"CMMC_LEVEL_1_REPORT_(report_time).txt", "w") as f:
         f.write(f"CMMC Level Basic Audit 1 Report\n")
@@ -50,7 +59,7 @@ def main_menu():
         elif choice == "4":
             check_user_accounts()
         elif choice == "5":
-            genreate_report()
+            generate_report()
         elif choice == "6":
             break
         else:
